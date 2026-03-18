@@ -1,5 +1,6 @@
 /build/
 /disk/
 *.class
+*.jar
 nbproject/private/
 src/Dao/DBConnection.java
