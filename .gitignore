@@ -1,0 +1,5 @@
+/build/
+/disk/
+*.class
+nbproject/private/
+src/Dao/DBConnection.java
