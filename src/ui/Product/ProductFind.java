@@ -253,13 +253,13 @@ public class ProductFind extends javax.swing.JFrame {
         String pid = txtpid.getText().trim();
         String name = txtProName.getText();
 
-        if (pid.isEmpty() || name.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please fill Product id and Product name");
+        if (pid.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill Product id ");
             return;
         }
 
         ProductDAO dao = new ProductDAO();
-        Product pro = dao.getProductByID(pid, name);
+        Product pro = dao.getProductByID(pid);
 
         DefaultTableModel model = (DefaultTableModel) producttable.getModel();
         model.setRowCount(0);

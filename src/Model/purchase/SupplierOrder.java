@@ -4,7 +4,10 @@
  */
 package Model.purchase;
 
+import java.time.LocalDate;
+import java.util.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -12,91 +15,85 @@ import java.util.Date;
  */
 public class SupplierOrder {
 
-    private String SOId;
-    private String Sid;
-    private String Pid; 
-    private Date OrderDate;
-    private Date DeliveryDate; 
-    private double AddvancePaymet;
+    private String soId;
+    private String sid;
+    private List<SupplieOrderItem> items = new ArrayList<>();
+    private LocalDate orderDate;
+    private LocalDate deliveryDate;
+    private double advancePayment;
     private double duePayment;
     private double totalPayment;
-    private String OrderStatus;
-    private Date paymentdate;
-    private boolean deliveryStatus=false;
+    private double amount;
+    private String orderStatus;
+    private LocalDate paymentdate;
 
-    public boolean isDeliveryStatus() {
-        return deliveryStatus;
+    public void setOrderDate(LocalDate orderDate) {
+        this.orderDate = orderDate;
     }
 
-    public void setDeliveryStatus(boolean deliveryStatus) {
-        this.deliveryStatus = deliveryStatus;
+    public void setDeliveryDate(LocalDate deliveryDate) {
+        this.deliveryDate = deliveryDate;
     }
 
-    public void setPaymentdate(Date paymentdate) {
+    public void setPaymentdate(LocalDate paymentdate) {
         this.paymentdate = paymentdate;
     }
 
-    public Date getPaymentdate() {
+    public LocalDate getOrderDate() {
+        return orderDate;
+    }
+
+    public LocalDate getDeliveryDate() {
+        return deliveryDate;
+    }
+
+    public LocalDate getPaymentdate() {
         return paymentdate;
     }
 
-    public String getSOId() {
-        return SOId;
+    public LocalDate getTillEnd() {
+        return tillEnd;
     }
-    
-    public void setSid(String Sid) {
-        this.Sid = Sid;
+    private boolean deliveryStatus = false;
+    private String discount;
+    private String paymentMode;
+    private String paymentId;
+    private LocalDate tillEnd;
+
+    public double getAdvancePayment() {
+        return advancePayment;
     }
 
-    public String getSid() {
-        return Sid;
+    public void setTillEnd(LocalDate tillEnd) {
+        this.tillEnd = tillEnd;
     }
 
-    public String getPid() {
-        return Pid;
+    public String getPaymentId() {
+        return paymentId;
     }
 
-    public void setPid(String Pid) {
-        this.Pid = Pid;
-    }
-    public Date getOrderDate() {
-        return OrderDate;
+    public void setAdvancePayment(double advancePayment) {
+        this.advancePayment = advancePayment;
     }
 
-    public Date getDeliveryDate() {
-        return DeliveryDate;
+    public void setPaymentId(String paymentId) {
+        this.paymentId = paymentId;
     }
 
-    public double getAddvancePaymet() {
-        return AddvancePaymet;
+    public void setSoId(String soId) {
+        this.soId = soId;
     }
 
-    public double getDuePayment() {
-        return duePayment;
+    public void setSid(String sid) {
+        this.sid = sid;
     }
 
-    public double getTotalPayment() {
-        return totalPayment;
+    public void setItems(List<SupplieOrderItem> items) {
+        this.items = items;
     }
 
-    public String getOrderStatus() {
-        return OrderStatus;
-    }
-
-    public void setSOId(String SOId) {
-        this.SOId = SOId;
-    }
-
-    public void setOrderDate(Date OrderDate) {
-        this.OrderDate = OrderDate;
-    }
-
-    public void setDeliveryDate(Date DeliveryDate) {
-        this.DeliveryDate = DeliveryDate;
-    }
-
-    public void setAddvancePaymet(double AddvancePaymet) {
-        this.AddvancePaymet = AddvancePaymet;
+    public void setaddvancePaymet(double addvancePaymet) {
+        this.advancePayment = addvancePaymet;
     }
 
     public void setDuePayment(double duePayment) {
@@ -107,7 +104,69 @@ public class SupplierOrder {
         this.totalPayment = totalPayment;
     }
 
-    public void setOrderStatus(String OrderStatus) {
-        this.OrderStatus = OrderStatus;
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
+
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+
+    public void setDeliveryStatus(boolean deliveryStatus) {
+        this.deliveryStatus = deliveryStatus;
+    }
+
+    public void setDiscount(String discount) {
+        this.discount = discount;
+    }
+
+    public void setPaymentMode(String paymentMode) {
+        this.paymentMode = paymentMode;
+    }
+
+    public String getSoId() {
+        return soId;
+    }
+
+    public String getSid() {
+        return sid;
+    }
+
+    public List<SupplieOrderItem> getItems() {
+        return items;
+    }
+
+    public double getaddvancePaymet() {
+        return advancePayment;
+    }
+
+    public double getDuePayment() {
+        return duePayment;
+    }
+
+    public double getTotalPayment() {
+        return totalPayment;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public String getOrderStatus() {
+        return orderStatus;
+    }
+
+    public boolean isDeliveryStatus() {
+        return deliveryStatus;
+    }
+
+    public String getDiscount() {
+        return discount;
+    }
+
+    public String getPaymentMode() {
+        return paymentMode;
+    }
+
 }

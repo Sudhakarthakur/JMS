@@ -88,6 +88,7 @@ public class Tables {
                     + "price DECIMAL(10,2) not null,"
                     + "todayPrice DECIMAL(10,2) not null,"
                     + "pstatus BOOLEAN NOT NULL DEFAULT true,"
+                    + "qid VARCHAR(6) NOT NULL,"
                     + " url VARCHAR(100) "
                     + ")";
 
@@ -119,6 +120,10 @@ public class Tables {
                     + "orderStatus VARCHAR(30),"
                     + "fullPaymentDate DATE,"
                     + "delveryStatus BOOLEAN DEFAULT false,"
+                    + "paymentMode VARCHAR(30) DEFAULT CASH,"
+                    + "paymentID VARCHAR(30),"
+                    + "amount decimal(10,2) NOT NULL,"
+                    + "discount VARCHAR(10) DEFAULT NOTHING"
                     + "CONSTRAINT fk_supplier_sid FOREIGN KEY (sid)"
                     + "REFERENCES  supplier(sid),"
                     + "CONSTRAINT fk_product_pid FOREIGN KEY (pid)"
@@ -127,6 +132,28 @@ public class Tables {
 
             stm.executeUpdate(SupplierOrder);
             System.out.println("supplierOrder table created");
+
+            String SupplierQutation = "CREATE TABLE IF NOT EXISTS supplierQutation("
+                    + "qid VARCHAR(6) PRIMARY KEY,"
+                    + "soid VARCHAR(6) NOT NULL,"
+                    + "perUnit VARCHAR(10) NOT NULL,"
+                    + "ratePerUnit decimal(10,2),"
+                    + "tillValid DATE,"
+                    + "FOREIGN KEY(soid) REFRENCES supplierOrder(soid) ON DELETE CASCADE"
+                    + ")";
+            stm.executeUpdate(SupplierQutation);
+            System.out.println("Supplier Outatuion is created");
+
+            String SupplierOrderItems = "CREATE TABLE IF NOT EXISTS supplierorderItems("
+                    + "soItemID VARCHAR(6) PRIMARY KEY,"
+                    + "soid VARCHAR(6) NOT NULL,"
+                    + "pid VARCHAR(6) NOT NULL,"
+                    + "quantity INT,"
+                    + "FOREIGN KEY (soid) REFERENCES supplierOrder(soid) ON DELETE CASCADE,"
+                    + "FOREIGN KEY (pid) REFERENCES product(pid) ON DELETE CASCADE"
+                    + ")";
+            stm.executeUpdate(SupplierOrderItems);
+            System.out.println("Supplier OrderITems  is created");
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);

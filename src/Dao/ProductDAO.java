@@ -15,6 +15,41 @@ import java.util.List;
  */
 public class ProductDAO {
 
+    public boolean prodectAlreadyExitsOrNot(Product pro) {
+        try {
+            Connection con = DBConnection.getConnection();
+            String query = "SELECT 1 FROM product WHERE categary = ? AND metal = ? AND design = ? AND carat = ?";
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1, pro.getCategary());
+            ps.setString(2, pro.getMetal());
+            ps.setString(3, pro.getDesign());
+            ps.setString(4, pro.getCarat());
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            } catch (Exception ex) {
+                return false;
+            }
+        } catch (Exception ex) {
+            return false;
+        }
+    }
+    
+      public boolean ExitsProduct(String pid) {
+        try {
+            Connection con = DBConnection.getConnection();
+            String Query = "SELECT 1 FROM product WHER pid=?";
+            PreparedStatement ps = con.prepareStatement(Query);
+            ps.setString(1, pid);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+
+    }
+
     public String addProduct(Product pro) throws SQLException {
         try {
             Connection con = DBConnection.getConnection();
@@ -33,16 +68,16 @@ public class ProductDAO {
             ps.setString(10, pro.getDesign());
             ps.setDouble(11, pro.getTodayPrice());
             int rows = ps.executeUpdate();
-            if( rows > 0){
+            if (rows > 0) {
                 return pid;
-        }else{
+            } else {
                 return null;
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
             return null;
         }
-        
+
     }
 
     public List<Product> getAllProduct() {
@@ -60,6 +95,9 @@ public class ProductDAO {
                 pro.setMetal(rs.getString("metal"));
                 pro.setWeight(rs.getDouble("weight"));
                 pro.setPrice(rs.getDouble("price"));
+                pro.setCarat(rs.getString("carat"));
+                pro.setDesign(rs.getString("design"));
+                pro.setTodayPrice(rs.getDouble("todayPrice"));
 //                pro.setQuantity(rs.getInt("quantity"));
 
                 list.add(pro);
@@ -121,17 +159,17 @@ public class ProductDAO {
         return list;
     }
 
-    public Product getProductByID(String pid, String name) {
+    public Product getProductByID(String pid) {
         Product pro = null;
         try {
             Connection con = DBConnection.getConnection();
-            String findProductById = "SELECT * FROM product WHERE pid = ? AND name = ?";
+            String findProductById = "SELECT * FROM product WHERE pid = ?";
             PreparedStatement ps = con.prepareStatement(findProductById);
             ps.setString(1, pid);
-            ps.setString(2, name);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
+
                 pro = new Product();
                 pro.setPid(rs.getString("pid"));
                 pro.setName(rs.getString("name"));
@@ -139,6 +177,9 @@ public class ProductDAO {
                 pro.setMetal(rs.getString("metal"));
                 pro.setWeight(rs.getDouble("weight"));
                 pro.setPrice(rs.getDouble("price"));
+                pro.setCarat(rs.getString("carat"));
+                pro.setDesign(rs.getString("design"));
+                pro.setTodayPrice(rs.getDouble("todayPrice"));
 //                pro.setQuantity(rs.getInt("quantity"));
             }
         } catch (Exception ex) {

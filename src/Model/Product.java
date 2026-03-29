@@ -11,6 +11,7 @@ package Model;
 public class Product {
 
     private String pid;
+    private String qid;
     private String name;
     private String categary; // ring braslate
     private String metal;  // gold silver
@@ -29,6 +30,13 @@ public class Product {
 
     public void setDesign(String design) {
         this.design = design;
+    }
+    public String getQid() {
+        return qid;
+    }
+
+    public void setQid(String qid) {
+        this.qid = qid;
     }
 
     public void setCarat(String carat) {
